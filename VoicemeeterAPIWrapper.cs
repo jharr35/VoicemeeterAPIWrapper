@@ -10,21 +10,21 @@ namespace VoicemeeterAPIWrapper
         #region Delegates
 
         [UnmanagedFunctionPointer(CallingConvention.StdCall)]
-        public delegate int VBVMR_VBAUDIOCALLBACK(IntPtr lpUser, VoicemeeterCallBackCommand nCommand, IntPtr lpData, int nnn);
+        public delegate int VoicemeeterAudioCallback(IntPtr lpUser, VoicemeeterCallBackCommand nCommand, IntPtr lpData, int nnn);
 
         #endregion
 
         #region Structs
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct VBVMR_AUDIOINFO
+        public struct VoicemeeterAudioInfo
         {
             public int samplerate;
             public int nbSamplePerFrame;
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct VBVMR_AUDIOBUFFER
+        public struct VoicemeeterAudioBuffer
         {
             public int audiobuffer_sr;              // Sampling rate
             public int audiobuffer_nbs;             // Number of samples per frame
@@ -37,7 +37,7 @@ namespace VoicemeeterAPIWrapper
         }
 
         [StructLayout(LayoutKind.Sequential, Pack = 1)]
-        public struct VBAN_VMRT_PACKET
+        public struct VoicemeeterRealTimePacket
         {
             public byte VoicemeeterType;                // 1 = Voicemeeter, 2 = Voicemeeter Banana, 3 = Voicemeeter Potato
             public byte Reserved;                       // Unused
@@ -339,10 +339,10 @@ namespace VoicemeeterAPIWrapper
         #region VB-Audio Callback
         // The VBVMR_AudioCallbackRegister function
         [DllImport("VoicemeeterRemote.dll", EntryPoint = "VBVMR_AudioCallbackRegister")]
-        public static extern int AudioCallbackRegister32(VoicemeeterAudioCallbackMode mode, VBVMR_VBAUDIOCALLBACK pCallback, IntPtr lpUser, string szClientName);
+        public static extern int AudioCallbackRegister32(VoicemeeterAudioCallbackMode mode, VoicemeeterAudioCallback pCallback, IntPtr lpUser, string szClientName);
 
         [DllImport("VoicemeeterRemote64.dll", EntryPoint = "VBVMR_AudioCallbackRegister")]
-        public static extern int AudioCallbackRegister64(VoicemeeterAudioCallbackMode mode, VBVMR_VBAUDIOCALLBACK pCallback, IntPtr lpUser, string szClientName);
+        public static extern int AudioCallbackRegister64(VoicemeeterAudioCallbackMode mode, VoicemeeterAudioCallback pCallback, IntPtr lpUser, string szClientName);
 
         // The VBVMR_AudioCallbackStart function
         [DllImport("VoicemeeterRemote.dll", EntryPoint = "VBVMR_AudioCallbackStart")]
@@ -836,7 +836,7 @@ namespace VoicemeeterAPIWrapper
 
         #region Audio Callback
         //Wrapper for method AudioCallbackRegister
-        public string AudioCallbackRegister(VoicemeeterAudioCallbackMode mode, VBVMR_VBAUDIOCALLBACK callbackFunction, IntPtr userData, string clientName)
+        public string AudioCallbackRegister(VoicemeeterAudioCallbackMode mode, VoicemeeterAudioCallback callbackFunction, IntPtr userData, string clientName)
         {
             int result = Is64BitApplicationRunning ? AudioCallbackRegister64(mode, callbackFunction, userData, clientName) : AudioCallbackRegister32(mode, callbackFunction, userData, clientName);
 
@@ -948,7 +948,7 @@ namespace VoicemeeterAPIWrapper
 
         public string MacroButtonSetStatus(int nuLogicalButton, float status, VoicemeeterMacroButtonMode bitmode)
         {
-            int result = Is64BitApplicationRunning ? MacroButtonSetStatus64(nuLogicalButton, status, bitmode) : MacroButtonSetStatus32(nuLogicalButton, status, bitmode);
+            int result = Is64BitApplicationRunning ? MacroButtonSetStatus64(nuLogicalButton, ref status, bitmode) : MacroButtonSetStatus32(nuLogicalButton, ref status, bitmode);
 
             string resultMessage = result switch
             {
