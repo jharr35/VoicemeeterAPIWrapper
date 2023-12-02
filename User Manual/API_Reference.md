@@ -85,13 +85,13 @@ This document provides a detailed reference for the VoicemeeterAPIWrapper, a .NE
 
 ## Structs
 
-### VBVMR_AUDIOINFO
+### VoicemeeterAudioInfo
 - Contains audio information like `samplerate` and `nbSamplePerFrame`.
 
-### VBVMR_AUDIOBUFFER
+### VoicemeeterAudioBuffer
 - Contains audio buffer information.
 
-### VBAN_VMRT_PACKET
+### VoicemeeterRealTimePacket
 - Contains various information about the Voicemeeter packets.
 
 ## Notes
