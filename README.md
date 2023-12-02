@@ -61,10 +61,10 @@ Contributions to improve this wrapper are welcome. Please follow the standard fo
 This project is licensed under the MIT License - see the file for details.
 
 ## Contact Information
-JJ Harris
-tygurduck@gmail.com
+James Harris (TygurDuck)_
+tygurduck@gmail.com_
 https://github.com/jharr35
 
 ## Acknowledgments
-Voicemeeter for their awesome audio software - https://www.voicemeeter.com
+Voicemeeter for their awesome audio software - https://www.voicemeeter.com_
 Contributors and users of this API wrapper
