@@ -39,7 +39,7 @@ if (loginSuccess)
 
 // Logout after operations
 voicemeeter.Logout();
-
+```
 
 Explore the various methods provided by the API wrapper for different functionalities like managing audio levels, inputs, outputs, and more.
 
