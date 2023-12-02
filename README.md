@@ -43,7 +43,7 @@ voicemeeter.Logout();
 
 Explore the various methods provided by the API wrapper for different functionalities like managing audio levels, inputs, outputs, and more.
 
-### Features
+## Features
 Interface for Voicemeeter's audio management
 Methods for getting and setting parameters
 Audio level manipulation
@@ -51,16 +51,16 @@ Device enumeration and management
 Audio callback functionality
 Macro button controls
 
-### Documentation
+## Documentation
 Currently, there is no separate documentation. Please refer to the inline comments in the code for detailed descriptions of methods and their usage.
 
-### Contributing
+## Contributing
 Contributions to improve this wrapper are welcome. Please follow the standard fork-and-pull request workflow on GitHub.
 
-### License
+## License
 This project is licensed under the MIT License - see the file for details.
 
-### Contact Information
+## Contact Information
 JJ Harris
 tygurduck@gmail.com
 https://github.com/jharr35
