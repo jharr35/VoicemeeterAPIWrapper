@@ -20,6 +20,18 @@ namespace VoicemeeterAPIWrapper
             bool SetParameterFloat(string paramName, float value);
             bool SetParameterStringA(string paramName, string value);
             bool SetParameterStringW(string paramName, string value);
+            int Output_GetDeviceNumber();
+            Dictionary<string, string> Output_GetDeviceDescA(int zIndex);
+            Dictionary<string, string> Output_GetDeviceDescW(int zIndex);
+            int Input_GetDeviceNumber();
+            Dictionary<string, string> Input_GetDeviceDescA(int zIndex);
+            Dictionary<string, string> Input_GetDeviceDescW(int zIndex);
+            Dictionary<int, string> AudioCallbackRegister(VoicemeeterAudioCallbackMode mode, VoicemeeterAudioCallback callbackFunction, IntPtr userData, string clientName);
+            Dictionary<int, string> AudioCallbackStart();
+            Dictionary<int, string> AudioCallbackStop();
+            Dictionary<int, string> AudioCallbackUnregister();
+            bool MacroButtonIsDirty();
+            float MacroButtonGetStatus(int nuLogicalButton, VoicemeeterMacroButtonMode bitmode);
         }
 
 
@@ -764,7 +776,7 @@ namespace VoicemeeterAPIWrapper
         }
 
         //Wrapper for method Output_GetDeviceDescA
-        public string Output_GetDeviceDescA(int zIndex)
+        public Dictionary<string,string> Output_GetDeviceDescA(int zIndex)
         {
             VoicemeeterDeviceType nType;
             StringBuilder szDeviceName = new StringBuilder(512);
@@ -773,16 +785,30 @@ namespace VoicemeeterAPIWrapper
             int result = Is64BitApplicationRunning ? VBVMR_Output_GetDeviceDescA64(zIndex, out nType, szDeviceName, szHardwareId) : VBVMR_Output_GetDeviceDescA32(zIndex, out nType, szDeviceName, szHardwareId);
 
             if (result == 0)
-                return $"Type: {nType}\nName: {szDeviceName}\nId: {szHardwareId}";
+                return new Dictionary<string, string>
+                {
+                    { "Index", zIndex.ToString() },
+                    { "Type", nType.ToString() },
+                    { "Name", szDeviceName.ToString() },
+                    { "Id", szHardwareId.ToString() },
+                    { "Result", "Success" }
+                };
             else
             {
-                Console.WriteLine($"Unknown error: result = {result}");
-                return string.Empty;
+                string errorMessage = $"Unknown error: result = {result}";
+                return new Dictionary<string, string>
+                {
+                    { "Index", zIndex.ToString() },
+                    { "Type", "" },
+                    { "Name", "" },
+                    { "Id", "" },
+                    { "Result", errorMessage }
+                };
             }
         }
 
         //Wrapper for method Output_GetDeviceDescW
-        public string Output_GetDeviceDescW(int zIndex)
+        public Dictionary<string, string> Output_GetDeviceDescW(int zIndex)
         {
             VoicemeeterDeviceType nType;
             StringBuilder szDeviceName = new StringBuilder(512);
@@ -791,11 +817,27 @@ namespace VoicemeeterAPIWrapper
             int result = Is64BitApplicationRunning ? VBVMR_Output_GetDeviceDescA64(zIndex, out nType, szDeviceName, szHardwareId) : VBVMR_Output_GetDeviceDescA32(zIndex, out nType, szDeviceName, szHardwareId);
 
             if (result == 0)
-                return $"Type: {nType}\nName: {szDeviceName}\nId: {szHardwareId}";
+            {
+                return new Dictionary<string, string>
+                {
+                    { "Index", zIndex.ToString() },
+                    { "Type", nType.ToString() },
+                    { "Name", szDeviceName.ToString() },
+                    { "Id", szHardwareId.ToString() },
+                    { "Result", "Success" }
+                };
+            }
             else
             {
-                Console.WriteLine($"Unknown error: result = {result}");
-                return string.Empty;
+                string errorMessage = $"Unknown error: result = {result}";
+                return new Dictionary<string, string>
+                {
+                    { "Index", zIndex.ToString() },
+                    { "Type", "" },
+                    { "Name", "" },
+                    { "Id", "" },
+                    { "Result", errorMessage }
+                };
             }
         }
 
@@ -816,7 +858,7 @@ namespace VoicemeeterAPIWrapper
         }
 
         //Wrapper for method Input_GetDeviceDescA
-        public string Input_GetDeviceDescA(int zIndex)
+        public Dictionary<string, string> Input_GetDeviceDescA(int zIndex)
         {
             VoicemeeterDeviceType nType;
             StringBuilder szDeviceName = new StringBuilder(512);
@@ -825,16 +867,32 @@ namespace VoicemeeterAPIWrapper
             int result = Is64BitApplicationRunning ? VBVMR_Input_GetDeviceDescA64(zIndex, out nType, szDeviceName, szHardwareId) : VBVMR_Input_GetDeviceDescA32(zIndex, out nType, szDeviceName, szHardwareId);
 
             if (result == 0)
-                return $"Type: {nType}\nName: {szDeviceName}\nId: {szHardwareId}";
+            {
+                return new Dictionary<string, string>
+                {
+                    { "Index", zIndex.ToString() },
+                    { "Type", nType.ToString() },
+                    { "Name", szDeviceName.ToString() },
+                    { "Id", szHardwareId.ToString() },
+                    { "Result", "Success" }
+                };
+            }
             else
             {
-                Console.WriteLine($"Unknown error: result = {result}");
-                return string.Empty;
+                string errorMessage = $"Unknown error: result = {result}";
+                return new Dictionary<string, string>
+                {
+                    { "Index", zIndex.ToString() },
+                    { "Type", "" },
+                    { "Name", "" },
+                    { "Id", "" },
+                    { "Result", errorMessage }
+                };
             }
         }
 
         //Wrapper for method Input_GetDeviceDescW
-        public string Input_GetDeviceDescW(int zIndex)
+        public Dictionary<string, string> Input_GetDeviceDescW(int zIndex)
         {
             VoicemeeterDeviceType nType;
             StringBuilder szDeviceName = new StringBuilder(512);
@@ -843,75 +901,91 @@ namespace VoicemeeterAPIWrapper
             int result = Is64BitApplicationRunning ? VBVMR_Input_GetDeviceDescA64(zIndex, out nType, szDeviceName, szHardwareId) : VBVMR_Input_GetDeviceDescA32(zIndex, out nType, szDeviceName, szHardwareId);
 
             if (result == 0)
-                return $"Type: {nType}\nName: {szDeviceName}\nId: {szHardwareId}";
+            {
+                return new Dictionary<string, string>
+                {
+                    { "Index", zIndex.ToString() },
+                    { "Type", nType.ToString() },
+                    { "Name", szDeviceName.ToString() },
+                    { "Id", szHardwareId.ToString() },
+                    { "Result", "Success" }
+                };
+            }
             else
             {
-                Console.WriteLine($"Unknown error: result = {result}");
-                return string.Empty;
+                string errorMessage = $"Unknown error: result = {result}";
+                return new Dictionary<string, string>
+                {
+                    { "Index", zIndex.ToString() },
+                    { "Type", "" },
+                    { "Name", "" },
+                    { "Id", "" },
+                    { "Result", errorMessage }
+                };
             }
         }
         #endregion
 
         #region Audio Callback
         //Wrapper for method AudioCallbackRegister
-        public string AudioCallbackRegister(VoicemeeterAudioCallbackMode mode, VoicemeeterAudioCallback callbackFunction, IntPtr userData, string clientName)
+        public Dictionary<int, string> AudioCallbackRegister(VoicemeeterAudioCallbackMode mode, VoicemeeterAudioCallback callbackDelegate, IntPtr userData, string clientName)
         {
-            int result = Is64BitApplicationRunning ? AudioCallbackRegister64(mode, callbackFunction, userData, clientName) : AudioCallbackRegister32(mode, callbackFunction, userData, clientName);
+            int result = Is64BitApplicationRunning ? AudioCallbackRegister64(mode, callbackDelegate, userData, clientName) : AudioCallbackRegister32(mode, callbackDelegate, userData, clientName);
 
-            string resultMessage = result switch
+            Dictionary<int, string> resultMessage = result switch
             {
-                0 => "Successful (no errors)",
-                -1 => "Error: cannot find client (unexplained)",
-                1 => "Callback already registered (by another application",
-                _ => $"Unknown error: result = {result}"
+                0 => new Dictionary<int, string> { { result, "Successful (no errors)" } },
+                -1 => new Dictionary<int, string> { { result, "Error: cannot find client (unexplained)" } },
+                1 => new Dictionary<int, string> { { result, "Callback already registered (by another application" } },
+                _ => new Dictionary<int, string> { { result, $"Unknown error: result = {result}" } }
             };
 
             return resultMessage;
         }
 
         //Wrapper for method AudioCallbackStart
-        public string AudioCallbackStart()
+        public Dictionary<int, string> AudioCallbackStart()
         {
             int result = Is64BitApplicationRunning ? AudioCallbackStart64() : AudioCallbackStart32();
 
-            string resultMessage = result switch
+            Dictionary<int,string> resultMessage = result switch
             {
-                0 => "Successful (no errors)",
-                -1 => "Error: cannot find client (unexplained)",
-                -2 => "Callback already registered",
-                _ => $"Unknown error: result = {result}"
+                0 => new Dictionary<int, string> { { result, "Successful (no errors)" } },
+                -1 => new Dictionary<int, string> { { result, "Error: cannot find client (unexplained)" } },
+                -2 => new Dictionary<int, string> { { result, "Callback already registered" } },
+                _ => new Dictionary<int, string> { { result, $"Unknown error: result = {result}" } }
             };
 
             return resultMessage;
         }
 
         //Wrapper for method AudioCallbackStop
-        public string AudioCallbackStop()
+        public Dictionary<int, string> AudioCallbackStop()
         {
             int result = Is64BitApplicationRunning ? AudioCallbackStop64() : AudioCallbackStop32();
 
-            string resultMessage = result switch
+            Dictionary<int, string> resultMessage = result switch
             {
-                0 => "Successful (no errors)",
-                -1 => "Error: cannot find client (unexplained)",
-                -2 => "Callback already registered",
-                _ => $"Unknown error: result = {result}"
+                0 => new Dictionary<int, string> { { result, "Successful (no errors)" } },
+                -1 => new Dictionary<int, string> { { result, "Error: cannot find client (unexplained)" } },
+                -2 => new Dictionary<int, string> { { result, "Callback already registered" } },
+                _ => new Dictionary<int, string> { { result, $"Unknown error: result = {result}" } }
             };
 
             return resultMessage;
         }
 
         //Wrapper for method AudioCallbackUnregister
-        public string AudioCallbackUnregister()
+        public Dictionary<int, string> AudioCallbackUnregister()
         {
             int result = Is64BitApplicationRunning ? AudioCallbackUnregister64() : AudioCallbackUnregister32();
 
-            string resultMessage = result switch
+            Dictionary<int, string> resultMessage = result switch
             {
-                0 => "Successful (no errors)",
-                -1 => "Error: cannot find client (unexplained)",
-                -2 => "Callback already registered",
-                _ => $"Unknown error: result = {result}"
+                0 => new Dictionary<int, string> { { result, "Successful (no errors)" } },
+                -1 => new Dictionary<int, string> { { result, "Error: cannot find client (unexplained)" } },
+                -2 => new Dictionary<int, string> { { result, "Callback already registered" } },
+                _ => new Dictionary<int, string> { {  result, $"Unknown error: result = {result}" }}
             };
 
             return resultMessage;
