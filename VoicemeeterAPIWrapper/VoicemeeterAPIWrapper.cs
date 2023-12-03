@@ -1,11 +1,20 @@
 ﻿using System.Runtime.InteropServices;
 using System.Text;
+using Microsoft.Extensions.Logging;
 
-namespace VoicemeeterAPIWrapper
+namespace VoicemeeterAPIWrapperLibrary
 {
-    public class VMAPIWrapper
+    public class VoicemeeterAPIWrapper
     {
-        public interface IVMAPIWrapper
+        private readonly ILogger<VoicemeeterAPIWrapper> _logger;
+
+        //Constructor
+        public VoicemeeterAPIWrapper(ILogger<VoicemeeterAPIWrapper> logger)
+        {
+            _logger = logger;
+        }
+
+        public interface IVoicemeeterAPIWrapper
         {
             bool Login();
             bool Logout();
@@ -464,6 +473,7 @@ namespace VoicemeeterAPIWrapper
             }
             else
             {
+                _logger.LogError("Version Unknown");
                 return "Version Unknown";
             }
         }
@@ -485,6 +495,7 @@ namespace VoicemeeterAPIWrapper
             }
             else
             {
+                _logger.LogError("Version Unknown");
                 return "Version Unknown";
             }
         }
@@ -520,7 +531,7 @@ namespace VoicemeeterAPIWrapper
                     _ => $"Unknown error: result = {result}"
                 };
 
-                Console.WriteLine(errorMessage);
+               _logger.LogError(errorMessage);
                 return float.NaN;
             }
         }
@@ -547,7 +558,7 @@ namespace VoicemeeterAPIWrapper
                     _ => $"Unknown error: result = {result}"
                 };
 
-                Console.WriteLine(errorMessage);
+                _logger.LogError(errorMessage);
                 return string.Empty;
             }
         }
@@ -574,7 +585,7 @@ namespace VoicemeeterAPIWrapper
                     _ => $"Unknown error: result = {result}"
                 };
 
-                Console.WriteLine(errorMessage);
+                _logger.LogError(errorMessage);
                 return string.Empty;
             }
         }
@@ -603,7 +614,7 @@ namespace VoicemeeterAPIWrapper
                     _ => $"Unknown error: result = {result}"
                 };
 
-                Console.WriteLine(errorMessage);
+                _logger.LogError(errorMessage);
                 return float.NaN;
             }
         }
@@ -628,7 +639,7 @@ namespace VoicemeeterAPIWrapper
                     _ => $"Unknown error: result = {result}"
                 };
 
-                Console.WriteLine(errorMessage);
+                _logger.LogError(errorMessage);
                 return Int32.MinValue;
             }
         }
@@ -654,7 +665,7 @@ namespace VoicemeeterAPIWrapper
                     _ => $"Uknown eror: result = {result}"
                 };
 
-                Console.WriteLine(errorMessage);
+                _logger.LogError(errorMessage);
                 return false;
             }
         }
@@ -678,7 +689,7 @@ namespace VoicemeeterAPIWrapper
                     _ => $"Unknown error: result = {result}"
                 };
 
-                Console.Write(errorMessage);
+                _logger.LogError(errorMessage);
                 return false;
             }
         }
@@ -702,19 +713,19 @@ namespace VoicemeeterAPIWrapper
                     _ => $"Unknown error: result = {result}"
                 };
 
-                Console.Write(errorMessage);
+                _logger.LogError(errorMessage);
                 return false;
             }
         }
 
         //Wrapper for method SetParameters
-        public void SetParameters(string paramScript)
+        public string SetParameters(string paramScript)
         {
             int result = Is64BitApplicationRunning ? VBVMR_SetParameters64(paramScript) : VBVMR_SetParameters32(paramScript);
 
             if (result == 0)
             {
-                return;
+                return "SetParameters successful";
             }
             else
             {
@@ -727,19 +738,19 @@ namespace VoicemeeterAPIWrapper
                     _ => result > 0 ? $"Error: Script error at line {result}" : $"Unknown error: result = {result}"
                 };
 
-                Console.Write(errorMessage);
-                return;
+                _logger.LogError(errorMessage);
+                return errorMessage;
             }
         }
 
         //Wrapper for method SetParametersW
-        public void SetParametersW(string paramScript)
+        public string SetParametersW(string paramScript)
         {
             int result = Is64BitApplicationRunning ? VBVMR_SetParametersW64(paramScript) : VBVMR_SetParametersW32(paramScript);
 
             if (result == 0)
             {
-                return;
+                return "SetParametersW Successful";
             }
             else
             {
@@ -752,8 +763,8 @@ namespace VoicemeeterAPIWrapper
                     _ => result > 0 ? $"Error: Script error at line {result}" : $"Unknown error: result = {result}"
                 };
 
-                Console.Write(errorMessage);
-                return;
+                _logger.LogError(errorMessage);
+                return errorMessage;
             }
         }
         #endregion
@@ -770,7 +781,7 @@ namespace VoicemeeterAPIWrapper
             }
             else
             {
-                Console.WriteLine($"Unknown error: result = {result}");
+                _logger.LogError($"Unknown error: result = {result}");
                 return Int32.MinValue;
             }
         }
@@ -796,6 +807,8 @@ namespace VoicemeeterAPIWrapper
             else
             {
                 string errorMessage = $"Unknown error: result = {result}";
+                _logger.LogError(errorMessage);
+
                 return new Dictionary<string, string>
                 {
                     { "Index", zIndex.ToString() },
@@ -830,6 +843,8 @@ namespace VoicemeeterAPIWrapper
             else
             {
                 string errorMessage = $"Unknown error: result = {result}";
+                _logger.LogError(errorMessage);
+
                 return new Dictionary<string, string>
                 {
                     { "Index", zIndex.ToString() },
@@ -852,7 +867,7 @@ namespace VoicemeeterAPIWrapper
             }
             else
             {
-                Console.WriteLine($"Unknown error: result = {result}");
+                _logger.LogError($"Unknown error: result = {result}");
                 return Int32.MinValue;
             }
         }
@@ -880,6 +895,8 @@ namespace VoicemeeterAPIWrapper
             else
             {
                 string errorMessage = $"Unknown error: result = {result}";
+                _logger.LogError(errorMessage);
+
                 return new Dictionary<string, string>
                 {
                     { "Index", zIndex.ToString() },
@@ -914,6 +931,7 @@ namespace VoicemeeterAPIWrapper
             else
             {
                 string errorMessage = $"Unknown error: result = {result}";
+                _logger.LogError(errorMessage);
                 return new Dictionary<string, string>
                 {
                     { "Index", zIndex.ToString() },
@@ -940,6 +958,7 @@ namespace VoicemeeterAPIWrapper
                 _ => new Dictionary<int, string> { { result, $"Unknown error: result = {result}" } }
             };
 
+            _logger.LogError(resultMessage.ToString());
             return resultMessage;
         }
 
@@ -956,6 +975,7 @@ namespace VoicemeeterAPIWrapper
                 _ => new Dictionary<int, string> { { result, $"Unknown error: result = {result}" } }
             };
 
+            _logger.LogError(resultMessage.ToString());
             return resultMessage;
         }
 
@@ -972,6 +992,7 @@ namespace VoicemeeterAPIWrapper
                 _ => new Dictionary<int, string> { { result, $"Unknown error: result = {result}" } }
             };
 
+            _logger.LogError(resultMessage.ToString());
             return resultMessage;
         }
 
@@ -988,6 +1009,7 @@ namespace VoicemeeterAPIWrapper
                 _ => new Dictionary<int, string> { {  result, $"Unknown error: result = {result}" }}
             };
 
+            _logger.LogError(resultMessage.ToString());
             return resultMessage;
         }
         #endregion
@@ -1009,6 +1031,7 @@ namespace VoicemeeterAPIWrapper
                     _ => result > 0 ? "" : $"Unknown error: result = {result}"
                 };
 
+                _logger.LogError(errorMessage);
                 return true;
             }
         }
@@ -1034,6 +1057,7 @@ namespace VoicemeeterAPIWrapper
                     _ => $"Unknown error: result = {result}"
                 };
 
+                _logger.LogError(errorMessage); 
                 return float.NaN;
             }
         }
@@ -1052,6 +1076,7 @@ namespace VoicemeeterAPIWrapper
                 _ => $"Unknown error: result = {result}"
             };
 
+            _logger.LogError(resultMessage);
             return resultMessage;
         }
         #endregion

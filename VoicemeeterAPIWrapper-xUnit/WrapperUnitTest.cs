@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using VoicemeeterAPIWrapper;
-using System.Runtime.InteropServices;
-using static VoicemeeterAPIWrapper.VMAPIWrapper;
-using System.Reflection;
+﻿using VoicemeeterAPIWrapperLibrary;
+using Microsoft.Extensions.Logging;
+using static VoicemeeterAPIWrapperLibrary.VoicemeeterAPIWrapper;
 
 namespace VoicemeeterAPIWrapper_xUnit
 {
@@ -16,7 +10,7 @@ namespace VoicemeeterAPIWrapper_xUnit
         public void Wrapper_InitializesWithCorrectBitness()
         {
             //Accessing the static property directly from the class, not an instance
-            var bitness = VoicemeeterAPIWrapper.VMAPIWrapper.Is64BitApplicationRunning;
+            var bitness = VoicemeeterAPIWrapper.Is64BitApplicationRunning;
 
             //Assert
             Assert.Equal(Environment.Is64BitProcess, bitness);
@@ -26,7 +20,8 @@ namespace VoicemeeterAPIWrapper_xUnit
         public void Login_ReturnsTrue_WhenSuccessful()
         {
             //Arrange
-            var wrapper = new VMAPIWrapper();
+            var mockILogger = new Mock<ILogger<VoicemeeterAPIWrapper>>();
+            var wrapper = new VoicemeeterAPIWrapper(mockILogger.Object);
             wrapper.Logout();
 
             //Act & Assert
@@ -37,7 +32,8 @@ namespace VoicemeeterAPIWrapper_xUnit
         public void Logout_ReturnsTrue_WhenSuccessful()
         {
             //Arrange
-            var wrapper = new VMAPIWrapper();
+            var mockILogger = new Mock<ILogger<VoicemeeterAPIWrapper>>();
+            var wrapper = new VoicemeeterAPIWrapper(mockILogger.Object);
             wrapper.Login();
 
             //Act & Assert
@@ -48,10 +44,11 @@ namespace VoicemeeterAPIWrapper_xUnit
         public void Login_ReturnsFalse_WhenUnsuccessful()
         {
             //Arrange
-            var wrapper = new VMAPIWrapper();
+            var mockILogger = new Mock<ILogger<VoicemeeterAPIWrapper>>();
+            var wrapper = new VoicemeeterAPIWrapper(mockILogger.Object);
 
             //Setup mocking to simulate login failure
-            var mockWrapper = new Mock<IVMAPIWrapper>();
+            var mockWrapper = new Mock<IVoicemeeterAPIWrapper>();
             mockWrapper.Setup(wrapper => wrapper.Login()).Returns(false);
 
             //Act
@@ -68,7 +65,7 @@ namespace VoicemeeterAPIWrapper_xUnit
             var expectedBitness = Environment.Is64BitProcess ? "64-bit" : "32-bit";
 
             //Act
-            var bitness = GetApplicationBitness();
+            var bitness = VoicemeeterAPIWrapper.GetApplicationBitness();
 
             //Assert
             Assert.Equal(expectedBitness, bitness);
@@ -78,7 +75,7 @@ namespace VoicemeeterAPIWrapper_xUnit
         public void GetVoicemeeterType_ReturnsCorrectType()
         {
             //Arrange
-            var mockWrapper = new Mock<IVMAPIWrapper>();
+            var mockWrapper = new Mock<IVoicemeeterAPIWrapper>();
             mockWrapper.Setup(wrapper => wrapper.GetVoicemeeterType()).Returns("Voicemeeter Banana");
 
             //Act
@@ -92,7 +89,7 @@ namespace VoicemeeterAPIWrapper_xUnit
         public void GetVoicemeeterVersion_ReturnsCorrectVersion()
         {
             //Arrange
-            var mockWrapper = new Mock<IVMAPIWrapper>();
+            var mockWrapper = new Mock<IVoicemeeterAPIWrapper>();
             mockWrapper.Setup(wrapper => wrapper.GetVoicemeeterVersion()).Returns("1.0.0.0");
 
             //Act
@@ -106,7 +103,7 @@ namespace VoicemeeterAPIWrapper_xUnit
         public void IsParameterDirty_ReturnsTrue_WhenParametersChanged()
         {
             //Arrange
-            var mockWrapper = new Mock<IVMAPIWrapper>();
+            var mockWrapper = new Mock<IVoicemeeterAPIWrapper>();
             mockWrapper.Setup(wrapper => wrapper.IsParameterDirty()).Returns(true);
 
             //Act
@@ -120,7 +117,7 @@ namespace VoicemeeterAPIWrapper_xUnit
         public void IsParameterDirty_ReturnsFalse_WhenParametersUnchanged()
         {
             //Arrange
-            var mockWrapper = new Mock<IVMAPIWrapper>();
+            var mockWrapper = new Mock<IVoicemeeterAPIWrapper>();
             mockWrapper.Setup(wrapper => wrapper.IsParameterDirty()).Returns(false);
 
             //Act
@@ -134,7 +131,7 @@ namespace VoicemeeterAPIWrapper_xUnit
         public void GetParameterFloat_ReturnsFloat()
         {
             //Arrange
-            var mockWrapper = new Mock<IVMAPIWrapper>();
+            var mockWrapper = new Mock<IVoicemeeterAPIWrapper>();
             mockWrapper.Setup(wrapper => wrapper.GetParameterFloat("Strip[0].A1")).Returns(1f);
 
             //Act
@@ -148,7 +145,7 @@ namespace VoicemeeterAPIWrapper_xUnit
         public void GetParameterStringA_ReturnsANSIString()
         {
             //Arrange
-            var mockWrapper = new Mock<IVMAPIWrapper>();
+            var mockWrapper = new Mock<IVoicemeeterAPIWrapper>();
             mockWrapper.Setup(wrapper => wrapper.GetParameterStringA("Strip[0].Name")).Returns("Microphone");
 
             //Act
@@ -162,7 +159,7 @@ namespace VoicemeeterAPIWrapper_xUnit
         public void GetParameterStringW_ReturnsUnicodeString()
         {
             //Arrange
-            var mockWrapper = new Mock<IVMAPIWrapper>();
+            var mockWrapper = new Mock<IVoicemeeterAPIWrapper>();
             mockWrapper.Setup(wrapper => wrapper.GetParameterStringW("Strip[1].Label")).Returns("Discord");
 
             //Act
@@ -176,7 +173,7 @@ namespace VoicemeeterAPIWrapper_xUnit
         public void GetLevel_ReturnsFloat()
         {
             //Arrange
-            var mockWrapper = new Mock<IVMAPIWrapper>();
+            var mockWrapper = new Mock<IVoicemeeterAPIWrapper>();
             mockWrapper.Setup(wrapper => wrapper.GetLevel(0, 1)).Returns(98.6f);
             
 
@@ -192,7 +189,7 @@ namespace VoicemeeterAPIWrapper_xUnit
         public void GetMidiMessage_ReturnsInt()
         {
             //Arrange
-            var mockWrapper = new Mock<IVMAPIWrapper>();
+            var mockWrapper = new Mock<IVoicemeeterAPIWrapper>();
             byte[] midi = { 0, 3, 4, 5, 32, 2 };
             mockWrapper.Setup(wrapper => wrapper.GetMidiMessage(out midi)).Returns(15);
 
@@ -207,7 +204,7 @@ namespace VoicemeeterAPIWrapper_xUnit
         public void SetParameterFloat_WhenParameterSuccessfullyChanged()
         {
             //Arrange
-            var mockWrapper = new Mock<IVMAPIWrapper>();
+            var mockWrapper = new Mock<IVoicemeeterAPIWrapper>();
             mockWrapper.Setup(wrapper => wrapper.SetParameterFloat("Strip[0].A1", 1f)).Returns(true);
 
             //Act
@@ -221,7 +218,7 @@ namespace VoicemeeterAPIWrapper_xUnit
         public void SetParameterFloat_WhenParameterUnchanged()
         {
             //Arrange
-            var mockWrapper = new Mock<IVMAPIWrapper>();
+            var mockWrapper = new Mock<IVoicemeeterAPIWrapper>();
             mockWrapper.Setup(wrapper => wrapper.SetParameterFloat("Strip[0].A1", 1f)).Returns(false);
 
             //Act
@@ -235,7 +232,7 @@ namespace VoicemeeterAPIWrapper_xUnit
         public void SetParameterStringA_WhenParameterSuccessfullyChanged()
         {
             //Arrange
-            var mockWrapper = new Mock<IVMAPIWrapper>();
+            var mockWrapper = new Mock<IVoicemeeterAPIWrapper>();
             mockWrapper.Setup(wrapper => wrapper.SetParameterStringA("Strip[0].Label", "Mic")).Returns(true);
 
             //Act
@@ -249,7 +246,7 @@ namespace VoicemeeterAPIWrapper_xUnit
         public void SetParameterStringW_WhenParameterSuccessfullyChanged()
         {
             //Arrange
-            var mockWrapper = new Mock<IVMAPIWrapper>();
+            var mockWrapper = new Mock<IVoicemeeterAPIWrapper>();
             mockWrapper.Setup(wrapper => wrapper.SetParameterStringW("Strip[0].Label", "Mic")).Returns(true);
 
             //Act
@@ -263,7 +260,7 @@ namespace VoicemeeterAPIWrapper_xUnit
         public void SetParameterStringW_WhenParameterFailsChange()
         {
             //Arrange
-            var mockWrapper = new Mock<IVMAPIWrapper>();
+            var mockWrapper = new Mock<IVoicemeeterAPIWrapper>();
             mockWrapper.Setup(wrapper => wrapper.SetParameterStringW("Strip[1].Label", "Mic")).Returns(false);
 
             //Act
@@ -277,7 +274,7 @@ namespace VoicemeeterAPIWrapper_xUnit
         public void SetParameterStringA_WhenParameterFailsChange()
         {
             //Arrange
-            var mockWrapper = new Mock<IVMAPIWrapper>();
+            var mockWrapper = new Mock<IVoicemeeterAPIWrapper>();
             mockWrapper.Setup(wrapper => wrapper.SetParameterStringA("Strip[1].Label", "Mic")).Returns(false);
 
             //Act
@@ -291,7 +288,7 @@ namespace VoicemeeterAPIWrapper_xUnit
         public void Output_GetDeviceNumber_ReturnsInt()
         {
             //Arrange
-            var mockWrapper = new Mock<IVMAPIWrapper>();
+            var mockWrapper = new Mock<IVoicemeeterAPIWrapper>();
             mockWrapper.Setup(wrapper => wrapper.Output_GetDeviceNumber()).Returns(5);
 
             //Act
@@ -305,7 +302,7 @@ namespace VoicemeeterAPIWrapper_xUnit
         public void Output_GetDeviceDescA_ReturnsDictionaryWithFiveEntries()
         {
             //Arrange
-            var mockWrapper = new Mock<IVMAPIWrapper>();
+            var mockWrapper = new Mock<IVoicemeeterAPIWrapper>();
 
             //Create expected dictionary
             var expectedDictionary = new Dictionary<string, string>
@@ -330,7 +327,7 @@ namespace VoicemeeterAPIWrapper_xUnit
         public void Output_GetDeviceDescW_ReturnsDictionaryWithFiveEntries()
         {
             //Arrange
-            var mockWrapper = new Mock<IVMAPIWrapper>();
+            var mockWrapper = new Mock<IVoicemeeterAPIWrapper>();
 
             //Create expected dictionary
             var expectedDictionary = new Dictionary<string, string>
@@ -355,7 +352,7 @@ namespace VoicemeeterAPIWrapper_xUnit
         public void Input_GetDeviceNumber_ReturnsInt()
         {
             //Arrange
-            var mockWrapper = new Mock<IVMAPIWrapper>();
+            var mockWrapper = new Mock<IVoicemeeterAPIWrapper>();
             mockWrapper.Setup(wrapper => wrapper.Input_GetDeviceNumber()).Returns(5);
 
             //Act
@@ -369,7 +366,7 @@ namespace VoicemeeterAPIWrapper_xUnit
         public void Input_GetDeviceDescA_ReturnsDictionaryWithFiveEntries()
         {
             //Arrange
-            var mockWrapper = new Mock<IVMAPIWrapper>();
+            var mockWrapper = new Mock<IVoicemeeterAPIWrapper>();
 
             //Create expected dictionary
             var expectedDictionary = new Dictionary<string, string>
@@ -394,7 +391,7 @@ namespace VoicemeeterAPIWrapper_xUnit
         public void Input_GetDeviceDescW_ReturnsDictionaryWithFiveEntries()
         {
             //Arrange
-            var mockWrapper = new Mock<IVMAPIWrapper>();
+            var mockWrapper = new Mock<IVoicemeeterAPIWrapper>();
 
             //Create expected dictionary
             var expectedDictionary = new Dictionary<string, string>
@@ -419,18 +416,18 @@ namespace VoicemeeterAPIWrapper_xUnit
         public void AudioCallbackRegister_UsesProvidedCallback()
         {
             // Arrange
-            var mockWrapper = new Mock<IVMAPIWrapper>();
+            var mockWrapper = new Mock<IVoicemeeterAPIWrapper>();
             var userData = IntPtr.Zero;
             var clientName = "TestClient";
 
             // Using a real method as the callback
-            VoicemeeterAudioCallback callbackDelegate = MyTestCallbackMethod;
+            VoicemeeterAPIWrapper.VoicemeeterAudioCallback callbackDelegate = MyTestCallbackMethod;
 
             // You can also use a lambda expression:
             // VoicemeeterAudioCallback callbackDelegate = (userPtr, command, data, n) => 0;
 
             mockWrapper.Setup(wrapper => wrapper.AudioCallbackRegister(
-                VoicemeeterAudioCallbackMode.Main,
+                VoicemeeterAPIWrapper.VoicemeeterAudioCallbackMode.Main,
                 callbackDelegate,
                 userData,
                 clientName))
@@ -438,7 +435,7 @@ namespace VoicemeeterAPIWrapper_xUnit
 
             // Act
             var result = mockWrapper.Object.AudioCallbackRegister(
-                VoicemeeterAudioCallbackMode.Main,
+                VoicemeeterAPIWrapper.VoicemeeterAudioCallbackMode.Main,
                 callbackDelegate,
                 userData,
                 clientName);
@@ -448,7 +445,7 @@ namespace VoicemeeterAPIWrapper_xUnit
             Assert.Equal("Successful (no errors)", result[0]);
         }
 
-        private int MyTestCallbackMethod(IntPtr lpUser, VoicemeeterCallBackCommand nCommand, IntPtr lpData, int nnn)
+        private int MyTestCallbackMethod(IntPtr lpUser, VoicemeeterAPIWrapper.VoicemeeterCallBackCommand nCommand, IntPtr lpData, int nnn)
         {
             // Implement mock callback logic here
             return 0;
@@ -458,7 +455,7 @@ namespace VoicemeeterAPIWrapper_xUnit
         public void AudioCallbackStart_ReturnsDictionaryResult_Successful()
         {
             //Arrange
-            var mockWrapper = new Mock<IVMAPIWrapper>();
+            var mockWrapper = new Mock<IVoicemeeterAPIWrapper>();
 
             //Create Expected Dictionary result
             Dictionary<int, string> expectedDictionary = new Dictionary<int, string>
@@ -479,7 +476,7 @@ namespace VoicemeeterAPIWrapper_xUnit
         public void AudioCallbackStop_ReturnsDictionary_Successful()
         {
             //Arrange
-            var mockWrapper = new Mock<IVMAPIWrapper>();
+            var mockWrapper = new Mock<IVoicemeeterAPIWrapper>();
 
             //Create expected Dictionary result
             Dictionary<int, string> expectedDictionary = new Dictionary<int, string>
@@ -500,7 +497,7 @@ namespace VoicemeeterAPIWrapper_xUnit
         public void AudioCallbackUnRegister_ReturnsDictionary_Successful()
         {
             //Arrange
-            var mockWrapper = new Mock<IVMAPIWrapper>();
+            var mockWrapper = new Mock<IVoicemeeterAPIWrapper>();
 
             //Create expected Dictionary result
             Dictionary<int, string> expectedDictionary = new Dictionary<int, string>
@@ -521,7 +518,7 @@ namespace VoicemeeterAPIWrapper_xUnit
         public void MacroButtonIsDirty_ReturnsFalse_UnchangedState()
         {
             //Arrange
-            var mockWrapper = new Mock<IVMAPIWrapper>();
+            var mockWrapper = new Mock<IVoicemeeterAPIWrapper>();
             mockWrapper.Setup(wrapper => wrapper.MacroButtonIsDirty()).Returns(false);
 
             //Act
