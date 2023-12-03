@@ -52,7 +52,8 @@ Explore the various methods provided by the API wrapper for different functional
 - Macro button controls
 
 ## Documentation
-Currently, there is no separate documentation. Please refer to the inline comments in the code for detailed descriptions of methods and their usage.
+A work-in-progress user manual is available in this respository. <br>
+It is recommended to start at [Getting Started](User_Manual/Getting_Started.md)
 
 ## Contributing
 Contributions to improve this wrapper are welcome. Please follow the standard fork-and-pull request workflow on GitHub.
