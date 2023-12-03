@@ -29,6 +29,8 @@ namespace VoicemeeterAPIWrapperLibrary
             bool SetParameterFloat(string paramName, float value);
             bool SetParameterStringA(string paramName, string value);
             bool SetParameterStringW(string paramName, string value);
+            string SetParametersA(string paramScript);
+            string SetParametersW(string paramScript);
             int Output_GetDeviceNumber();
             Dictionary<string, string> Output_GetDeviceDescA(int zIndex);
             Dictionary<string, string> Output_GetDeviceDescW(int zIndex);
@@ -41,6 +43,7 @@ namespace VoicemeeterAPIWrapperLibrary
             Dictionary<int, string> AudioCallbackUnregister();
             bool MacroButtonIsDirty();
             float MacroButtonGetStatus(int nuLogicalButton, VoicemeeterMacroButtonMode bitmode);
+            Dictionary<int, string> MacroButtonSetStatus(int nuLogicalButton, float status, VoicemeeterMacroButtonMode bitmode);
         }
 
 
@@ -718,14 +721,14 @@ namespace VoicemeeterAPIWrapperLibrary
             }
         }
 
-        //Wrapper for method SetParameters
-        public string SetParameters(string paramScript)
+        //Wrapper for method SetParametersA
+        public string SetParametersA(string paramScript)
         {
             int result = Is64BitApplicationRunning ? VBVMR_SetParameters64(paramScript) : VBVMR_SetParameters32(paramScript);
 
             if (result == 0)
             {
-                return "SetParameters successful";
+                return "SetParametersA successful";
             }
             else
             {
@@ -1062,21 +1065,21 @@ namespace VoicemeeterAPIWrapperLibrary
             }
         }
 
-        public string MacroButtonSetStatus(int nuLogicalButton, float status, VoicemeeterMacroButtonMode bitmode)
+        public Dictionary<int, string> MacroButtonSetStatus(int nuLogicalButton, float status, VoicemeeterMacroButtonMode bitmode)
         {
             int result = Is64BitApplicationRunning ? MacroButtonSetStatus64(nuLogicalButton, ref status, bitmode) : MacroButtonSetStatus32(nuLogicalButton, ref status, bitmode);
 
-            string resultMessage = result switch
+            Dictionary<int, string> resultMessage = result switch
             {
-                0 => "Successful",
-                -1 => "Error: no client found (unexplained)",
-                -2 => "Error: no server",
-                -3 => "Error: unknown parameter",
-                -5 => "Error: structure mismatch",
-                _ => $"Unknown error: result = {result}"
+                0 => new Dictionary<int, string> { { result, "Successful" } },
+                -1 => new Dictionary<int, string> { { result, "Error: no client found (unexplained)" } },
+                -2 => new Dictionary<int, string> { { result, "Error: no server" } },
+                -3 => new Dictionary<int, string> { { result, "Error: unknown parameter" } },
+                -5 => new Dictionary<int, string> { { result, "Error: structure mismatch" } },
+                _ => new Dictionary<int, string> { { result, $"Unknown error: result = {result}" } }
             };
 
-            _logger.LogError(resultMessage);
+            _logger.LogError(resultMessage.ToString());
             return resultMessage;
         }
         #endregion

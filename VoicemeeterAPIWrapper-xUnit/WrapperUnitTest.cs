@@ -16,6 +16,7 @@ namespace VoicemeeterAPIWrapper_xUnit
             Assert.Equal(Environment.Is64BitProcess, bitness);
         }
 
+        #region Login
         [Fact]
         public void Login_ReturnsTrue_WhenSuccessful()
         {
@@ -57,7 +58,9 @@ namespace VoicemeeterAPIWrapper_xUnit
             //Assert
             Assert.False(result);
         }
+        #endregion
 
+        #region General Information
         [Fact]
         public void GetApplicationBitness_ReturnsCorrectBitness()
         {
@@ -98,7 +101,9 @@ namespace VoicemeeterAPIWrapper_xUnit
             //Assert
             Assert.Equal("1.0.0.0", version);
         }
+        #endregion
 
+        #region Get Parameters
         [Fact]
         public void IsParameterDirty_ReturnsTrue_WhenParametersChanged()
         {
@@ -168,7 +173,9 @@ namespace VoicemeeterAPIWrapper_xUnit
             //Assert
             Assert.Equal("Discord", paramW);
         }
+        #endregion
 
+        #region Levels
         [Fact]
         public void GetLevel_ReturnsFloat()
         {
@@ -199,7 +206,9 @@ namespace VoicemeeterAPIWrapper_xUnit
             //Assert
             Assert.Equal(15, result);
         }
+        #endregion
 
+        #region Set Parameters
         [Fact]
         public void SetParameterFloat_WhenParameterSuccessfullyChanged()
         {
@@ -284,6 +293,44 @@ namespace VoicemeeterAPIWrapper_xUnit
             Assert.False(result);
         }
 
+        [Fact]
+        public void SetParametersA_ReturnsString_Successful()
+        {
+            //Arrange
+            var mockWrapper = new Mock<IVoicemeeterAPIWrapper>();
+
+            //Create expected script
+            string expectedScript = "blah, blah, blah";
+
+            mockWrapper.Setup(wrapper => wrapper.SetParametersA(expectedScript)).Returns("SetParametersA Successful");
+
+            //Act
+            var result = mockWrapper.Object.SetParametersA(expectedScript);
+
+            //Assert
+            Assert.Equal("SetParametersA Successful", result);
+        }
+
+        [Fact]
+        public void SetParametersW_ReturnsString_Successful()
+        {
+            //Arrange
+            var mockWrapper = new Mock<IVoicemeeterAPIWrapper>();
+
+            //Create expected script
+            string expectedScript = "blah, blah, blah";
+
+            mockWrapper.Setup(wrapper => wrapper.SetParametersW(expectedScript)).Returns("SetParametersW Successful");
+
+            //Act
+            var result = mockWrapper.Object.SetParametersW(expectedScript);
+
+            //Assert
+            Assert.Equal("SetParametersW Successful", result);
+        }
+        #endregion
+
+        #region Devices Enumerator
         [Fact]
         public void Output_GetDeviceNumber_ReturnsInt()
         {
@@ -411,7 +458,9 @@ namespace VoicemeeterAPIWrapper_xUnit
             //Assert
             Assert.Equal(expectedDictionary, result);
         }
+        #endregion
 
+        #region Audio Callback
         [Fact]
         public void AudioCallbackRegister_UsesProvidedCallback()
         {
@@ -513,7 +562,9 @@ namespace VoicemeeterAPIWrapper_xUnit
             //Assert
             Assert.Equal(expectedDictionary, result);
         }
+        #endregion
 
+        #region Macro Buttons
         [Fact]
         public void MacroButtonIsDirty_ReturnsFalse_UnchangedState()
         {
@@ -528,5 +579,40 @@ namespace VoicemeeterAPIWrapper_xUnit
             Assert.False(result);
         }
 
+        [Fact]
+        public void MacroButtonGetStatus_ReturnsFloat_Successful()
+        {
+            //Arrange 
+            var mockWrapper = new Mock<IVoicemeeterAPIWrapper>();
+            mockWrapper.Setup(wrapper => wrapper.MacroButtonGetStatus(1, VoicemeeterMacroButtonMode.StateOnly)).Returns(0f);
+
+            //Act
+            var result = mockWrapper.Object.MacroButtonGetStatus(1, VoicemeeterMacroButtonMode.StateOnly);
+
+            //Assert
+            Assert.Equal(0f, result);
+        }
+
+        [Fact]
+        public void MacroButtonSetStatus_ReturnsDictionary()
+        {
+            //Arrange 
+            var mockWrapper = new Mock<IVoicemeeterAPIWrapper>();
+
+            //create expectedDictionary
+            Dictionary<int, string> expectedDictionary = new Dictionary<int, string>
+            {
+                {0, "Successful" }
+            };
+
+            mockWrapper.Setup(wrapper => wrapper.MacroButtonSetStatus(1, 1f, VoicemeeterMacroButtonMode.StateOnly)).Returns(expectedDictionary);
+
+            //Act
+            var result = mockWrapper.Object.MacroButtonSetStatus(1, 1f, VoicemeeterMacroButtonMode.StateOnly);
+
+            //Assert
+            Assert.Equal(expectedDictionary, result);
+        }
+        #endregion
     }
 }
