@@ -3,9 +3,27 @@ using System.Text;
 
 namespace VoicemeeterAPIWrapper
 {
-    public class VoicemeeterAPIWrapper
+    public class VMAPIWrapper
     {
-        private static bool Is64BitApplicationRunning => GetApplicationBitness() == "64-bit";
+        public interface IVMAPIWrapper
+        {
+            bool Login();
+            bool Logout();
+            string GetVoicemeeterType();
+            string GetVoicemeeterVersion();
+            bool IsParameterDirty();
+            float GetParameterFloat(string paramName);
+            string GetParameterStringA(string paramName);
+            string GetParameterStringW(string paramName);
+            float GetLevel(int nType, int nuChannel);
+            int GetMidiMessage(out byte[] midiBuffer);
+            bool SetParameterFloat(string paramName, float value);
+            bool SetParameterStringA(string paramName, string value);
+            bool SetParameterStringW(string paramName, string value);
+        }
+
+
+        public static bool Is64BitApplicationRunning => GetApplicationBitness() == "64-bit";
 
         #region Delegates
 
@@ -182,7 +200,7 @@ namespace VoicemeeterAPIWrapper
         [DllImport("VoicemeeterRemote.dll", EntryPoint = "VBVMR_Login")]
         private static extern int VBVMR_Login32();
 
-        [DllImport("VoicemeeterRemote64.dll", EntryPoint = "VBMR_Login")]
+        [DllImport("VoicemeeterRemote64.dll", EntryPoint = "VBVMR_Login")]
         private static extern int VBVMR_Login64();
 
         //Importing the VBVMR_Logout function from the DLL
@@ -606,13 +624,13 @@ namespace VoicemeeterAPIWrapper
 
         #region Set Parameters
         //Wrapper for method SetParameterFloat
-        public void SetParameterFloat(string paramName, float value)
+        public bool SetParameterFloat(string paramName, float value)
         {
             int result = Is64BitApplicationRunning ? VBVMR_SetParameterFloat64(paramName, value) : VBVMR_SetParameterFloat32(paramName, value);
 
             if (result == 0)
             {
-                return;
+                return true;
             }
             else
             {
@@ -625,18 +643,18 @@ namespace VoicemeeterAPIWrapper
                 };
 
                 Console.WriteLine(errorMessage);
-                return;
+                return false;
             }
         }
 
         //Wrapper for method SetParameterStringA
-        public void SetParameterStringA(string paramName, string value)
+        public bool SetParameterStringA(string paramName, string value)
         {
             int result = Is64BitApplicationRunning ? VBVMR_SetParameterStringA64(paramName, value) : VBVMR_SetParameterStringA32(paramName, value);
 
             if (result == 0)
             {
-                return;
+                return true;
             }
             else
             {
@@ -649,18 +667,18 @@ namespace VoicemeeterAPIWrapper
                 };
 
                 Console.Write(errorMessage);
-                return;
+                return false;
             }
         }
 
         //Wrapper for method SetParameterStringW
-        public void SetParameterStringW(string paramName, string value)
+        public bool SetParameterStringW(string paramName, string value)
         {
             int result = Is64BitApplicationRunning ? VBVMR_SetParameterStringW64(paramName, value) : VBVMR_SetParameterStringW32(paramName, value);
 
             if (result == 0)
             {
-                return;
+                return true;
             }
             else
             {
@@ -673,7 +691,7 @@ namespace VoicemeeterAPIWrapper
                 };
 
                 Console.Write(errorMessage);
-                return;
+                return false;
             }
         }
 
