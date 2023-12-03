@@ -7,7 +7,7 @@ This guide will help you get started with the VoicemeeterAPIWrapper, a .NET libr
 
 ## Initial Setup
 
-Before you begin, ensure you have completed the installation steps outlined in the [Installation Guide](INSTALLATION.md).
+Before you begin, ensure you have completed the installation steps outlined in the [Installation Guide](User_Manual/INSTALLATION.md).
 
 ## Basic Usage
 
@@ -54,11 +54,11 @@ voicemeeter.Logout();
 
 ## Advanced Features
 
-As you become more familiar with the wrapper, you can explore advanced features like manipulating audio levels, managing inputs/outputs, and more. Refer to the [API Reference](API_REFERENCE.md) for detailed information about the capabilities of the wrapper.
+As you become more familiar with the wrapper, you can explore advanced features like manipulating audio levels, managing inputs/outputs, and more. Refer to the [API Reference](User_Manual/API_REFERENCE.md) for detailed information about the capabilities of the wrapper.
 
 ## Troubleshooting
 
-If you run into any issues while using the wrapper, check the [Troubleshooting](TROUBLESHOOTING.md) guide for help.
+If you run into any issues while using the wrapper, check the [Troubleshooting](User_Manual/TROUBLESHOOTING.md) guide for help.
 
 ## Next Steps
 
