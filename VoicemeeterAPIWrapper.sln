@@ -7,6 +7,22 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VoicemeeterAPIWrapper", "Vo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VoicemeeterAPIWrapper-xUnit", "VoicemeeterAPIWrapper-xUnit\VoicemeeterAPIWrapper-xUnit.csproj", "{3F7D6E64-F840-4A7B-A537-0B52B7024C21}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "User_Manual", "User_Manual", "{B1F28948-1CB6-4FF5-A6ED-B7AA5C124202}"
+	ProjectSection(SolutionItems) = preProject
+		User_Manual\API_Reference.md = User_Manual\API_Reference.md
+		User_Manual\Contributing.md = User_Manual\Contributing.md
+		User_Manual\Getting_Started.md = User_Manual\Getting_Started.md
+		User_Manual\Installation.md = User_Manual\Installation.md
+		User_Manual\Troubleshooting.md = User_Manual\Troubleshooting.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{35C2ABFF-361A-4C60-913A-90D61A9F3A08}"
+	ProjectSection(SolutionItems) = preProject
+		LICENSE.txt = LICENSE.txt
+		README.md = README.md
+		SECURITY.md = SECURITY.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
