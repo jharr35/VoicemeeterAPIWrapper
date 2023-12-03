@@ -53,7 +53,7 @@ Explore the various methods provided by the API wrapper for different functional
 
 ## Documentation
 A work-in-progress user manual is available in this respository. <br>
-It is recommended to start at [Getting Started](UserManual/Getting_Started.md)
+It is recommended to start at [Getting Started](User_Manual/Getting_Started.md)
 
 ## Contributing
 Contributions to improve this wrapper are welcome. Please follow the standard fork-and-pull request workflow on GitHub.
