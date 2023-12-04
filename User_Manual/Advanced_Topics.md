@@ -8,16 +8,16 @@ This section explores advanced functionalities and techniques for users who are 
 ### 2. [Advanced Automation Techniques](Advanced_Topics_Section2.md)
   - Automating tasks using the API.
   - Scripting for dynamic audio environments.
-### 3. Networking and Remote Control
+### 3. [Networking and Remote Control](Advanced_Topics_Section3.md)
   - Utilizing the API over a network.
   - Controlling Voicemeeter remotely.
-### 4. Extending VoicemeeterAPIWrapper
+### 4. [Extending VoicemeeterAPIWrapper](Advanced_Topics_Section4.md)
   - Developing custom extensions for the API.
   - Interfacing with third-party software and hardware.
-### 5. Performance Optimization
+### 5. [Performance Optimization](Advanced_Topics_Section5.md)
   - Tips for optimizing audio processing.
   - Best practices for resource management.
-### 6. Debugging and Troubleshooting
+### 6. [Debugging and Troubleshooting](Advanced_Topics_Section6.md)
   - Advanced debugging techniques.
   - Handling common and complex issues.
 ### Conclusion
