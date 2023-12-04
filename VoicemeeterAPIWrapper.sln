@@ -11,6 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "User_Manual", "User_Manual"
 	ProjectSection(SolutionItems) = preProject
 		User_Manual\API_Reference.md = User_Manual\API_Reference.md
 		User_Manual\Contributing.md = User_Manual\Contributing.md
+		Examples_And_Use_Cases.md = Examples_And_Use_Cases.md
 		User_Manual\Getting_Started.md = User_Manual\Getting_Started.md
 		User_Manual\Installation.md = User_Manual\Installation.md
 		User_Manual\Troubleshooting.md = User_Manual\Troubleshooting.md
