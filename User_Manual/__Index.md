@@ -7,6 +7,7 @@
 ### [Examples & Use Cases](Examples_And_Use_Cases.md)
 ### [Troubleshooting](Troubleshooting.md)
 ### [API Reference](API_Reference.md)
+### [Contributing](Contributing.md)
 <br>
 
 ## [Advanced Topics](Advanced_Topics.md)
