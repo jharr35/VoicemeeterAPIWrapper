@@ -1,4 +1,4 @@
-### Section 1: Custom Audio Routing and Processing
+# Section 1: Custom Audio Routing and Processing
 [Back to Main Document](Advanced_Topics.md)
 
 ## Overview
