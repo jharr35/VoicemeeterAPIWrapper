@@ -31,7 +31,8 @@ Before installing the VoicemeeterAPIWrapper, ensure that the following prerequis
 
 Ensure that `VoicemeeterRemote.dll` and `VoicemeeterRemote64.dll` are accessible:<br>
 - They should be located in the same directory as Voicemeeter's installation or within the system's PATH environment variable.<br>
-- Alternatively, copy these DLLs to your project's output directory.
+- Alternatively, copy these DLLs to your project's output directory.<br>
+- The DLLs have also been included in this repository [VoicmeeterRemote.dll](..\VoicemeeterAPIWrapper\VoicemeeterRemote.dll) [VoicemeeterRemote64.dll](..\VoicemeeterAPIWrapper\VoicemeeterRemote64.dll)
 
 ### Step 4: Building the Project
 
