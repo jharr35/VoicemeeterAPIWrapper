@@ -6,8 +6,10 @@
 ## [Troubleshooting](Troubleshooting.md)
 ## [API Reference](API_Reference.md)
 <br>
-## [Advanced Topics]
-- [Section 1 - Custom Audio Routing & Processing](Advanced_Topics_Section1.md)
-- [Section 2 - Advanced Automation Techniques](Advanced_Topics_Section2.md)
+
+## [Advanced Topics](Advanced_Topics.md)
+
+- # [Section 1 Custom Audio Routing & Processing](Advanced_Topics_Section1.md)
+- # [Section 2 Advanced Automation Techniques](Advanced_Topics_Section2.md)
 
 
