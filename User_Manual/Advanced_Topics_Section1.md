@@ -1,4 +1,6 @@
 ### Section 1: Custom Audio Routing and Processing
+[Back to Main Document](Advanced_Topics.md)
+
 ## Overview
 Custom audio routing and processing are crucial for achieving a specific sound quality or for managing complex audio setups. This section delves into how VoicemeeterAPIWrapper can be utilized to create advanced audio routing scenarios and integrate with external digital signal processing (DSP) tools.
 
@@ -21,4 +23,6 @@ Custom audio routing and processing are crucial for achieving a specific sound q
 
   - Recording Studios: Leverage VoicemeeterAPIWrapper for complex recording setups, routing different instruments or voices through separate processing chains before mixing.
 
-  - Live Performance: Setup live performance environments where multiple audio sources are mixed live, processed through external DSP tools, and routed to various outputs for public address systems or recording devices.
+  - Live Performance: Setup live performance environments where multiple audio sources are mixed live, processed through external DSP tools, and routed to various outputs for public address systems or recording devices. <br><br>
+
+[Back to Main Document](Advanced_Topics.md)
