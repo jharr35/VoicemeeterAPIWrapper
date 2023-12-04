@@ -1,5 +1,5 @@
 # Section 2: Advanced Automation Techniques
-[Back to Advanced_Topics](Advanced_Topics.md)
+[Back to Main Page](Advanced_Topics.md)
 
 ## Overview
 In this section, we explore the capabilities of VoicemeeterAPIWrapper for implementing advanced automation in audio setups. This involves using scripts and automation tools to control audio settings dynamically, enhancing efficiency and enabling complex audio management scenarios.
@@ -24,4 +24,4 @@ In this section, we explore the capabilities of VoicemeeterAPIWrapper for implem
 
 - Live Performance Setups: Use automation to handle complex live performance setups, allowing for on-the-fly adjustments and cues during a performance. <br><br>
 
-[Back to Advanced_Topics](Advanced_Topics.md)
+[Back to Main Page](Advanced_Topics.md)
