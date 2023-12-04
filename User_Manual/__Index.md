@@ -1,6 +1,6 @@
 # User Manual Index 
 
-<br><br>### [Getting_Started](Getting_Started.md)
+<br><br> ### [Getting_Started](Getting_Started.md)
 ### [Installation](Installation.md)
 ### [Examples & Use Cases](Examples_And_Use_Cases.md)
 ### [Troubleshooting](Troubleshooting.md)
