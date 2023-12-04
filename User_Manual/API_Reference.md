@@ -3,99 +3,52 @@
 
 ## Overview
 
-This document provides a detailed reference for the VoicemeeterAPIWrapper, a .NET library designed to interact with the Voicemeeter audio software.
+This reference details the functionalities of the VoicemeeterAPIWrapper, a .NET library for interfacing with Voicemeeter audio software.
 
 ## Class: VoicemeeterAPIWrapper
 
 ### Properties
-- `Is64BitApplicationRunning`: Indicates if the application using the wrapper is 64-bit.
+
+- **Is64BitApplicationRunning**: Indicates whether the application using the wrapper is 64-bit.
 
 ### Methods
 
 #### Login
-- `Login()`: Logs into Voicemeeter. Returns `true` if successful.
+
+- **Login()**: Logs into Voicemeeter. Returns `true` if successful.
 
 #### Logout
-- `Logout()`: Logs out of Voicemeeter. Returns `true` if successful.
+
+- **Logout()**: Logs out of Voicemeeter. Returns `true` if successful.
 
 #### GetVoicemeeterType
-- `GetVoicemeeterType()`: Gets the type of Voicemeeter installed (e.g., Voicemeeter, Banana, Potato). Returns a string representing the type.
+
+- **GetVoicemeeterType()**: Retrieves the type of Voicemeeter installed (e.g., Voicemeeter, Banana, Potato). Returns a string representing the type.
 
 #### GetVoicemeeterVersion
-- `GetVoicemeeterVersion()`: Gets the version of Voicemeeter. Returns a string with the version number.
+
+- **GetVoicemeeterVersion()**: Obtains the Voicemeeter version. Returns a string with the version information.
 
 #### IsParameterDirty
-- `IsParameterDirty()`: Checks if any Voicemeeter parameter has changed since the last call. Returns `true` if changes are detected.
+
+- **IsParameterDirty()**: Checks if any Voicemeeter parameter has changed since the last check. Returns `true` if changes are detected.
 
 #### GetParameterFloat
-- `GetParameterFloat(string paramName)`: Gets a parameter value as a float. Returns the parameter value.
 
-#### GetParameterStringA
-- `GetParameterStringA(string paramName)`: Gets a parameter value as an ANSI string. Returns the parameter value.
-
-#### GetParameterStringW
-- `GetParameterStringW(string paramName)`: Gets a parameter value as a Unicode string. Returns the parameter value.
-
-#### GetLevel
-- `GetLevel(int nType, int nuChannel)`: Gets the level of a specific channel. Returns the level as a float.
-
-#### GetMidiMessage
-- `GetMidiMessage(out byte[] midiBuffer)`: Retrieves MIDI messages. Returns the length of the MIDI message.
+- **GetParameterFloat(parameterName)**: Retrieves the floating-point value of a specified parameter. `parameterName` is a string identifying the parameter. Returns the parameter value as a float.
 
 #### SetParameterFloat
-- `SetParameterFloat(string paramName, float value)`: Sets a parameter value as a float.
 
-#### SetParameterStringA
-- `SetParameterStringA(string paramName, string value)`: Sets a parameter value as an ANSI string.
+- **SetParameterFloat(parameterName, value)**: Sets the floating-point value of a specified parameter. `parameterName` is the parameter to set, and `value` is the new value. Returns `true` if successful.
 
-#### SetParameterStringW
-- `SetParameterStringW(string paramName, string value)`: Sets a parameter value as a Unicode string.
+#### Additional Methods
 
-#### SetParameters
-- `SetParameters(string paramScript)`: Sets multiple parameters based on a script.
+- Additional methods include `GetParameterStringA`, `SetParameterStringA`, `GetLevel`, and others for comprehensive control and interaction with Voicemeeter.
 
-#### Output_GetDeviceNumber
-- `Output_GetDeviceNumber()`: Gets the number of output devices. Returns the number of devices.
+## Enums and Structures
 
-#### Output_GetDeviceDescA
-- `Output_GetDeviceDescA(int zIndex)`: Gets the description of an output device. Returns a string with the device description.
+The library includes several enums and structures to facilitate interaction with Voicemeeter, such as `VoicemeeterDeviceType`, `VoicemeeterCallBackCommand`, and `VBVMR_AUDIOINFO`.
 
-#### Input_GetDeviceNumber
-- `Input_GetDeviceNumber()`: Gets the number of input devices. Returns the number of devices.
+## Conclusion
 
-#### Input_GetDeviceDescA
-- `Input_GetDeviceDescA(int zIndex)`: Gets the description of an input device. Returns a string with the device description.
-
-## Enums
-
-### VoicemeeterDeviceType
-- `MME`, `WDM`, `KS`, `ASIO`
-
-### VoicemeeterCallBackCommand
-- Various callback commands like `Starting`, `Ending`, `Change`, etc.
-
-### VoicemeeterAudioCallbackMode
-- `Input`, `Output`, `Main`
-
-### VoicemeeterMacroButtonMode
-- `Default`, `StateOnly`, `Trigger`
-
-### VoicemeeterModeState
-- Various states like `Mute`, `Solo`, `Mono`, etc.
-
-## Structs
-
-### VoicemeeterAudioInfo
-- Contains audio information like `samplerate` and `nbSamplePerFrame`.
-
-### VoicemeeterAudioBuffer
-- Contains audio buffer information.
-
-### VoicemeeterRealTimePacket
-- Contains various information about the Voicemeeter packets.
-
-## Notes
-- The above descriptions provide a basic overview of each class, method, enum, and struct. For detailed usage, refer to the specific method documentation and the Voicemeeter SDK documentation available on GitHub.
-
-## Further Information
-For more details on using the Voicemeeter API and handling specific audio processing scenarios, refer to the official [Voicemeeter Remote API documentation](https://github.com/vburel2018/Voicemeeter-SDK).
+The VoicemeeterAPIWrapper provides a robust set of functionalities for .NET applications to interact with Voicemeeter. For detailed usage and examples, refer to the [Getting Started Guide](Getting_Started.md).

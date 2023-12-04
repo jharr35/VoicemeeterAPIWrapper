@@ -3,44 +3,36 @@
 
 ## Prerequisites
 
-Before installing the VoicemeeterAPIWrapper, ensure that the following prerequisites are met:<br>
-1. **.NET Environment:** Make sure you have a .NET compatible environment set up, such as .NET Core or .NET Framework.<br>
-2. **Voicemeeter Software:** Voicemeeter must be installed on your system. You can download it from [Voicemeeter's official website](https://vb-audio.com/Voicemeeter/).<br>
-3. **Voicemeeter DLLs:** The `VoicemeeterRemote.dll` and `VoicemeeterRemote64.dll` should be accessible by the application. These are typically installed with Voicemeeter.
+Before installing the VoicemeeterAPIWrapper, ensure the following requirements are met:
+
+- **.NET Environment:** A .NET compatible environment such as .NET Core or .NET Framework is required.
+- **Voicemeeter Software:** Voicemeeter must be installed on your system. Download it from [Voicemeeter's official website](https://vb-audio.com/Voicemeeter/).
+- **Voicemeeter DLLs:** Ensure `VoicemeeterRemote.dll` and `VoicemeeterRemote64.dll` are accessible to your application. These DLLs are typically installed with Voicemeeter.
 
 ## Step-by-Step Installation
 
-### Step 1: Cloning or Downloading the Repository
+### Step 1: Obtain the Source Code
 
-1. Clone the repository using Git or download the source code as a ZIP file.
-    ```bash
-    git clone https://github.com/yourusername/VoicemeeterAPIWrapper.git
-    ```
-2. If downloaded as a ZIP file, extract it to your desired location.
+Clone the repository using Git or download the source code as a ZIP file:
 
-### Step 2: Including the Wrapper in Your Project
+```bash
+git clone https://github.com/yourusername/VoicemeeterAPIWrapper.git
+```
 
-1. Open your .NET project in your IDE.<br>
-2. Add the VoicemeeterAPIWrapper project to your solution.<br>
-3. Reference the VoicemeeterAPIWrapper in your project:
-    - Right-click on your project in the Solution Explorer.
-    - Choose "Add" > "Reference...".
-    - Select the VoicemeeterAPIWrapper project.
+If downloaded as a ZIP file, extract it to your desired location.
 
-### Step 3: Verifying DLL Accessibility
+### Step 2: Include the Wrapper in Your Project
 
-Ensure that `VoicemeeterRemote.dll` and `VoicemeeterRemote64.dll` are accessible:<br>
-- They should be located in the same directory as Voicemeeter's installation or within the system's PATH environment variable.<br>
-- Alternatively, copy these DLLs to your project's output directory.
+Include the VoicemeeterAPIWrapper in your .NET project. You can do this by adding the project or the compiled DLL as a reference in your solution.
 
-### Step 4: Building the Project
+### Step 3: Ensure DLL Accessibility
 
-Build your project to ensure that everything is correctly set up. Resolve any build errors that may arise.
+Make sure the `VoicemeeterRemote.dll` and `VoicemeeterRemote64.dll` files are accessible in the runtime environment. This may involve copying them to the output directory or referencing their installation path.
+
+## Verifying the Installation
+
+After completing the installation steps, you can verify the successful integration by running a simple test in your application to check connectivity with Voicemeeter.
 
 ## Next Steps
 
-After successfully installing the VoicemeeterAPIWrapper, you can start using it in your project. For guidance on how to get started, refer to the [Getting Started](GETTING_STARTED.md) guide.
-
-## Troubleshooting
-
-If you encounter issues during the installation process, please check the [Troubleshooting](TROUBLESHOOTING.md) document or submit an issue on the GitHub repository.
+After installation, you're ready to start using the VoicemeeterAPIWrapper in your projects. See the [Getting Started Guide](Getting_Started.md) for basic usage instructions.
