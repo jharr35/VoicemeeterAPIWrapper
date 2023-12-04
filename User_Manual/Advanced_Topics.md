@@ -2,7 +2,7 @@
 ## Overview
 This section explores advanced functionalities and techniques for users who are already familiar with the basic operations of the VoicemeeterAPIWrapper. These topics aim to provide insights into more complex uses and integrations of the API.
 
-### 1. Custom Audio Routing and Processing
+### 1. [Custom Audio Routing and Processing](Advanced_Topics_Section1.md)
   - Discuss complex audio routing setups.
   - Integration with external DSP (Digital Signal Processing) tools.
 ### 2. Advanced Automation Techniques
