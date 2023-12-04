@@ -39,8 +39,8 @@ Build your project to ensure that everything is correctly set up. Resolve any bu
 
 ## Next Steps
 
-After successfully installing the VoicemeeterAPIWrapper, you can start using it in your project. For guidance on how to get started, refer to the [Getting Started](GETTING_STARTED.md) guide.
+After successfully installing the VoicemeeterAPIWrapper, you can start using it in your project. For guidance on how to get started, refer to the [Getting Started](Getting_Started.md) guide.
 
 ## Troubleshooting
 
-If you encounter issues during the installation process, please check the [Troubleshooting](TROUBLESHOOTING.md) document or submit an issue on the GitHub repository.
+If you encounter issues during the installation process, please check the [Troubleshooting](Troubleshooting.md) document or submit an issue on the GitHub repository.
