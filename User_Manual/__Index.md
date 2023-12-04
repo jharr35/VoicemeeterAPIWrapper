@@ -1,10 +1,10 @@
-# User Manual Index
+# User Manual Index <br>
 
-## [Getting_Started](Getting_Started.md)
-## [Installation](Installation.md)
-## [Examples & Use Cases](Examples_And_Use_Cases.md)
-## [Troubleshooting](Troubleshooting.md)
-## [API Reference](API_Reference.md)
+### [Getting_Started](Getting_Started.md)
+### [Installation](Installation.md)
+### [Examples & Use Cases](Examples_And_Use_Cases.md)
+### [Troubleshooting](Troubleshooting.md)
+### [API Reference](API_Reference.md)
 <br>
 
 ## [Advanced Topics](Advanced_Topics.md)
