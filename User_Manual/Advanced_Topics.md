@@ -5,7 +5,7 @@ This section explores advanced functionalities and techniques for users who are 
 ### 1. [Custom Audio Routing and Processing](Advanced_Topics_Section1.md)
   - Discuss complex audio routing setups.
   - Integration with external DSP (Digital Signal Processing) tools.
-### 2. Advanced Automation Techniques
+### 2. [Advanced Automation Techniques](Advanced_Topics_Section2.md)
   - Automating tasks using the API.
   - Scripting for dynamic audio environments.
 ### 3. Networking and Remote Control
