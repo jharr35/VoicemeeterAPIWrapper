@@ -1,6 +1,7 @@
 ﻿using VoicemeeterAPIWrapperLibrary;
 using Microsoft.Extensions.Logging;
 using static VoicemeeterAPIWrapperLibrary.VoicemeeterAPIWrapper;
+using VoicemeeterAPIWrapper;
 
 namespace VoicemeeterAPIWrapper_xUnit
 {
@@ -10,7 +11,7 @@ namespace VoicemeeterAPIWrapper_xUnit
         public void Wrapper_InitializesWithCorrectBitness()
         {
             //Accessing the static property directly from the class, not an instance
-            var bitness = VoicemeeterAPIWrapper.Is64BitApplicationRunning;
+            var bitness = Is64BitApplicationRunning;
 
             //Assert
             Assert.Equal(Environment.Is64BitProcess, bitness);

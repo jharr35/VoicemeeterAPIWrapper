@@ -1,10 +1,11 @@
 ﻿using System.Runtime.InteropServices;
 using System.Text;
 using Microsoft.Extensions.Logging;
+using VoicemeeterAPIWrapper;
 
 namespace VoicemeeterAPIWrapperLibrary
 {
-    public class VoicemeeterAPIWrapper
+    public partial class VoicemeeterAPIWrapper : IVoicemeeterAPIWrapper
     {
         private readonly ILogger<VoicemeeterAPIWrapper> _logger;
 
@@ -12,39 +13,7 @@ namespace VoicemeeterAPIWrapperLibrary
         public VoicemeeterAPIWrapper(ILogger<VoicemeeterAPIWrapper> logger)
         {
             _logger = logger;
-        }
-
-        public interface IVoicemeeterAPIWrapper
-        {
-            bool Login();
-            bool Logout();
-            string GetVoicemeeterType();
-            string GetVoicemeeterVersion();
-            bool IsParameterDirty();
-            float GetParameterFloat(string paramName);
-            string GetParameterStringA(string paramName);
-            string GetParameterStringW(string paramName);
-            float GetLevel(int nType, int nuChannel);
-            int GetMidiMessage(out byte[] midiBuffer);
-            bool SetParameterFloat(string paramName, float value);
-            bool SetParameterStringA(string paramName, string value);
-            bool SetParameterStringW(string paramName, string value);
-            string SetParametersA(string paramScript);
-            string SetParametersW(string paramScript);
-            int Output_GetDeviceNumber();
-            Dictionary<string, string> Output_GetDeviceDescA(int zIndex);
-            Dictionary<string, string> Output_GetDeviceDescW(int zIndex);
-            int Input_GetDeviceNumber();
-            Dictionary<string, string> Input_GetDeviceDescA(int zIndex);
-            Dictionary<string, string> Input_GetDeviceDescW(int zIndex);
-            Dictionary<int, string> AudioCallbackRegister(VoicemeeterAudioCallbackMode mode, VoicemeeterAudioCallback callbackFunction, IntPtr userData, string clientName);
-            Dictionary<int, string> AudioCallbackStart();
-            Dictionary<int, string> AudioCallbackStop();
-            Dictionary<int, string> AudioCallbackUnregister();
-            bool MacroButtonIsDirty();
-            float MacroButtonGetStatus(int nuLogicalButton, VoicemeeterMacroButtonMode bitmode);
-            Dictionary<int, string> MacroButtonSetStatus(int nuLogicalButton, float status, VoicemeeterMacroButtonMode bitmode);
-        }
+        }       
 
 
         public static bool Is64BitApplicationRunning => GetApplicationBitness() == "64-bit";
