@@ -222,3 +222,4 @@ C:\Users\jjhar\source\repos\VoicemeeterAPIWrapperLibrary\VoicemeeterAPIWrapper-x
 C:\Users\jjhar\source\repos\VoicemeeterAPIWrapperLibrary\VoicemeeterAPIWrapper-xUnit\bin\Debug\net7.0\Microsoft.Extensions.Logging.Abstractions.dll
 C:\Users\jjhar\source\repos\VoicemeeterAPIWrapperLibrary\VoicemeeterAPIWrapper-xUnit\bin\Debug\net7.0\Microsoft.Extensions.Options.dll
 C:\Users\jjhar\source\repos\VoicemeeterAPIWrapperLibrary\VoicemeeterAPIWrapper-xUnit\bin\Debug\net7.0\Microsoft.Extensions.Primitives.dll
+C:\Users\jjhar\source\repos\VoicemeeterAPIWrapperLibrary\VoicemeeterAPIWrapper-xUnit\obj\Debug\net7.0\VoicemeeterAPIWrapper-xUnit.sourcelink.json
