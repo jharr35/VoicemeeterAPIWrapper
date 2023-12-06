@@ -1,7 +1,6 @@
 ﻿using VoicemeeterAPIWrapperLibrary;
 using Microsoft.Extensions.Logging;
 using static VoicemeeterAPIWrapperLibrary.VoicemeeterAPIWrapper;
-using VoicemeeterAPIWrapper;
 
 namespace VoicemeeterAPIWrapper_xUnit
 {
